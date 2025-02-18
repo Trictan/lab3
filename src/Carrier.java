@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Carrier<T extends Car> {
     private int capacity;
     private ArrayList<T> load;
-    private Point position;
+    private P2D position;
 
 
-    public Carrier(int capacity, Point position) {
+    public Carrier(int capacity, P2D position) {
         this.capacity = capacity;
         this.position = position;
         this.load = new ArrayList<T>();
@@ -44,7 +44,7 @@ public class Carrier<T extends Car> {
         
     }
 
-    public Point getPosition() {
+    public P2D getPosition() {
         return position;
     }
 

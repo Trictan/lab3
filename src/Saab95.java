@@ -5,8 +5,8 @@ public class Saab95 extends Car{
 
     private boolean turboOn;
 
-    public Saab95(Color color){
-        super(2, 100, 0, color, "Saab95");
+    public Saab95(Color color, P2D startposition){
+        super(2, 100, 0, color, "Saab95", startposition);
         this.turboOn = false;
     }
 

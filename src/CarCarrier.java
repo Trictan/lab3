@@ -1,15 +1,13 @@
 package src;
 import java.awt.*;
-//import java.math.*;
-//import java.util.ArrayList;
-//import java.util.Arrays;
+
 
 public class CarCarrier extends Truck {
     private Carrier<Car> parent;
 
-    public CarCarrier(Color color, String modelname, int capacity, Point position) {
-        super(2, 100, 0, color, modelname);
-        this.parent = new Carrier<Car>(capacity, position);
+    public CarCarrier(Color color, String modelname, int capacity, P2D startposition) {
+        super(2, 100, 0, color, modelname, startposition);
+        this.parent = new Carrier<Car>(capacity, startposition);
         setIncline(getMaxIncline());
     }
 

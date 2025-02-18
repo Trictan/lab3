@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.awt.Color; import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.awt.geom.Point2D.Double;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ class CarTest {
 
     @Test
     void volvo240_getters() {
-        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0));
+        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0), new Point(0,0));
         assertEquals(4, myVolvo.getNrDoors());
         assertEquals(100, myVolvo.getEnginePower(),0.1);
         assertEquals(0, myVolvo.getCurrentSpeed(),0.1);
@@ -30,7 +31,7 @@ class CarTest {
 
     @Test
     void saab95_getters() {
-        Saab95 mySaab = new Saab95(new Color(0,255,0,0));
+        Saab95 mySaab = new Saab95(new Color(0,255,0,0), new Point(0,0));
         assertEquals(2, mySaab.getNrDoors());
         assertEquals(100, mySaab.getEnginePower(),0.1);
         assertEquals(0, mySaab.getCurrentSpeed(),0.1);
@@ -41,7 +42,7 @@ class CarTest {
 
     @Test
     void volvo240_gas() {
-        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0));
+        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0), new Point(0,0));
         // Volvo240 does not accept input outside [0,1].
         myVolvo.gas(1.1);
         assertEquals(0, myVolvo.getCurrentSpeed(),0.01);
@@ -54,7 +55,7 @@ class CarTest {
 
     @Test
     void volvo240_speed() {
-        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0));
+        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0), new Point(0,0));
         // Speed can't be negative
         for (var i=0; i<12;i++) {myVolvo.brake(0.5);}
         assertEquals(0, myVolvo.getCurrentSpeed(),0.01);
@@ -66,7 +67,7 @@ class CarTest {
 
     @Test
     void volvo240_turn_LR() {
-        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0));
+        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0), new Point2D().Double(0,0));
         for (var i=0; i<9;i++) {myVolvo.turnRight();}
         assertEquals(45, myVolvo.getDirection());
         for (var i=0; i<18;i++) {myVolvo.turnRight();}
@@ -75,7 +76,7 @@ class CarTest {
 
     @Test
     void volvo240_move_forward() {
-        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0));
+        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0), new Point(0,0));
         for (var i=0; i<120;i++) {myVolvo.gas(0.9);}
         // Observe, car is facing east.
         myVolvo.move();
@@ -85,7 +86,7 @@ class CarTest {
 
     @Test
     void volvo240_move_diagonal() {
-        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0));
+        Volvo240 myVolvo = new Volvo240(new Color(255,0,0,0), new Point(0,0));
         for (var i=0; i<9;i++) {myVolvo.turnRight();}
         for (var i=0; i<120;i++) {myVolvo.gas(0.9);}
         myVolvo.move();
@@ -95,7 +96,7 @@ class CarTest {
 
     @Test
     void scania_getters() {
-        Scania myScania = new Scania(new Color(255,0,0,0));
+        Scania myScania = new Scania(new Color(255,0,0,0), new Point(0,0));
         assertEquals(2, myScania.getNrDoors());
         assertEquals(300, myScania.getEnginePower(), 0.01);
         assertEquals(0, myScania.getCurrentSpeed(), 0.01);
@@ -106,7 +107,7 @@ class CarTest {
 
     @Test
     void scania_incline() {
-        Scania myScania = new Scania(new Color(255,0,0,0));
+        Scania myScania = new Scania(new Color(255,0,0,0), new Point(0,0));
         for (var i = 0; i < 20; i++) {myScania.increaseIncline();}
         assertEquals(70, myScania.getIncline()); // max 70°
         for (var i = 0; i < 20; i++) {myScania.decreaseIncline();}
@@ -115,7 +116,7 @@ class CarTest {
 
     @Test
     void scania_gas_while_incline() {
-        Scania myScania = new Scania(new Color(255,0,0,0));
+        Scania myScania = new Scania(new Color(255,0,0,0), new Point(0,0));
         for (var i = 0; i < 9; i++) {myScania.increaseIncline();}
         assertEquals(45, myScania.getIncline());  // inclined
         myScania.gas(0.5);
@@ -124,7 +125,7 @@ class CarTest {
 
     @Test
     void scania_incline_while_gas() {
-        Scania myScania = new Scania(new Color(255,0,0,0));
+        Scania myScania = new Scania(new Color(255,0,0,0), new Point(0,0));
         myScania.gas(0.5);
         assertEquals(1.5, myScania.getCurrentSpeed(), 0.01); // moving
         myScania.increaseIncline();
@@ -135,10 +136,10 @@ class CarTest {
     void cc() {
         CarCarrier myCC = new CarCarrier(new Color(255,0,0,0), "MAN", 3, new Point(0,0));
         CarCarrier myCC2 = new CarCarrier(new Color(255,0,0,0), "MAN", 2, new Point(0,0));
-        Saab95 mySaab1 = new Saab95(new Color(255,0,0,0));
-        Saab95 mySaab2 = new Saab95(new Color(0,255,0,0));
-        Saab95 mySaab3 = new Saab95(new Color(0,0,255,0));
-        Volvo240 myVolvo = new Volvo240(new Color(0,0,0,0));
+        Saab95 mySaab1 = new Saab95(new Color(255,0,0,0), new Point(0,0));
+        Saab95 mySaab2 = new Saab95(new Color(0,255,0,0), new Point(0,0));
+        Saab95 mySaab3 = new Saab95(new Color(0,0,255,0), new Point(0,0));
+        Volvo240 myVolvo = new Volvo240(new Color(0,0,0,0), new Point(0,0));
         myCC.decreaseIncline();
         myCC.loadCar(myCC2);
         myCC.getLoad();

@@ -6,8 +6,8 @@ public abstract class Truck extends Car {
     private int incline;
     private int maxIncline;
 
-    public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName);
+    public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, P2D startposition) {
+        super(nrDoors, enginePower, currentSpeed, color, modelName, startposition);
         this.incline = 0;
         this.maxIncline = 70;
     }
@@ -15,6 +15,13 @@ public abstract class Truck extends Car {
     @Override
     public boolean isTowable() {
         return false;
+    }
+
+    @Override
+    public void startEngine() {
+        if (getIncline() == 0) {
+            super.startEngine();
+        }
     }
 
     @Override

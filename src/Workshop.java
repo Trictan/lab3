@@ -1,12 +1,11 @@
 package src;
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Workshop<T extends Car> {
     private Carrier<T> parent;
     private ArrayList<String> whitelist;
 
-    public Workshop(int capacity, Point position, ArrayList<String> whitelist) {
+    public Workshop(int capacity, P2D position, ArrayList<String> whitelist) {
         this.parent = new Carrier<>(capacity, position);
         this.whitelist = whitelist;
     }
@@ -19,7 +18,7 @@ public class Workshop<T extends Car> {
         parent.setPosition(x, y);
     }
 
-    public Point getPosition() {
+    public P2D getPosition() {
         return parent.getPosition();
     }
 

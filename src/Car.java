@@ -6,17 +6,17 @@ public abstract class Car implements Movable{
     private final double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
     private int dirAngle; // The current direction of the car
-    private Point position;
+    private P2D position;
     private Color color; // Color of the car
     private final String modelName; // The car model name
     private boolean towed;
 
-    public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
+    public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, P2D startposition) {
         this.nrDoors=nrDoors;
         this.enginePower=enginePower;
         this.currentSpeed=0;
-        this.dirAngle = 90;
-        this.position = new Point(0,0);
+        this.dirAngle = 0;
+        this.position = startposition;
         this.color=color;
         this.modelName=modelName;
     }
@@ -60,7 +60,7 @@ public abstract class Car implements Movable{
         return modelName;
     }
 
-    public Point getPosition(){
+    public P2D getPosition(){
         return position;
     }
 
