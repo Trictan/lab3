@@ -39,9 +39,8 @@ public abstract class Car implements Movable{
         towed = false;
     }
 
-    // cc syftar på CarCarrier men objektet här är inte CarCarriern utan Carrier innuti CarCarrier?
-    protected void towedBy(Carrier cc) {
-        this.setPosition(cc.getPosition().getX(), cc.getPosition().getY());
+    protected void follow(Carrier carrier) { //fix
+        this.setPosition(carrier.getPosition().getX(), carrier.getPosition().getY());
     }
 
     //
