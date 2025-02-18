@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.util.ArrayList;
 
 // This panel represents the animated part of the view with the car images.
 
@@ -18,7 +17,7 @@ public class DrawPanel extends JPanel{
     Point[] carPoints = {new Point(), new Point(), new Point()};
 
     BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,300);
+    Point volvoWorkshopPoint = new Point(300,50);
 
     // TODO: Make this general for all cars
     void moveit(P2D p, int i){

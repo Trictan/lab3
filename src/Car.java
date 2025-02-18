@@ -79,7 +79,7 @@ public abstract class Car implements Movable{
     }
 
     public void startEngine(){
-        currentSpeed = 0.1;
+        if (!isTowed()) {currentSpeed = 0.1;}
     }
 
     public void stopEngine(){
@@ -100,7 +100,7 @@ public abstract class Car implements Movable{
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
-    private void setPosition(double x, double y) {
+    public void setPosition(double x, double y) {
         position.setLocation(x,y);
     }
 
@@ -126,7 +126,7 @@ public abstract class Car implements Movable{
         if (amount < 0 || amount > 1) {
             System.out.println("Invalid input: gas only accepts values in the interval [0,1].");
         } else {
-            incrementSpeed(amount);
+            if (!isTowed()) {incrementSpeed(amount);}
         }
     }
 

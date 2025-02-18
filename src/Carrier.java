@@ -31,7 +31,7 @@ public class Carrier<T extends Car> {
         double x_dif = car.getPosition().getX() - getPosition().getX();
         double y_dif = car.getPosition().getY() - getPosition().getY();
         double r = Math.sqrt(Math.pow(x_dif, 2)+Math.pow(y_dif, 2));
-        if (r<5) {return true;} else {
+        if (r<300) {return true;} else {
             return false;
         }
     }
@@ -52,8 +52,9 @@ public class Carrier<T extends Car> {
         if (load.size() < capacity) { // has space
             if (car.isTowable() && !car.isTowed()) { // car is ok to pickup
                 if (isClose(car)) {
-                    load.add(car);
+                    System.out.println("Towed " + car.getModelName());
                     car.stopEngine();
+                    load.add(car);
                     car.setTowed();
                 }
             }

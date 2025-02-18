@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.awt.*;
-import java.awt.Color;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -26,15 +26,18 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
+    Workshop<Car> myWorkshop;
 
     //methods:
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
-        Volvo240 myVolvo = new Volvo240(new Color(0,255,0,0), new P2D(0.0,0.0));
+        Volvo240 myVolvo = new Volvo240(new Color(0,255,0,0), new P2D(0,0));
         Saab95 mySaab = new Saab95(new Color(0,255,0,0), new P2D(0,100));
         Scania myScania = new Scania(new Color(0,255,0,0), new P2D(0,200));
+        ArrayList<String> whitelist = new ArrayList<>(Arrays.asList("Volvo240"));
+        cc.myWorkshop = new Workshop<Car>(3, new P2D(350,98), whitelist);
         cc.cars.add(myVolvo);
         cc.cars.add(mySaab);
         cc.cars.add(myScania);
@@ -52,8 +55,12 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (var i = 0; i < cars.size(); i++) {
-                cars.get(i).move();
-                P2D p = cars.get(i).getPosition();
+                Car currentCar = cars.get(i);
+                currentCar.move();
+                P2D p = currentCar.getPosition();
+                if (p.getX()<0) {currentCar.stopEngine(); currentCar.setPosition(0, p.getY()); for (var k = 0; k<36; k++) {currentCar.turnLeft();}; currentCar.startEngine();}
+                if (p.getX()>700) {currentCar.stopEngine(); currentCar.setPosition(700, p.getY()); for (var k = 0; k<36; k++) {currentCar.turnRight();}; currentCar.startEngine();}
+                if (p.getX() > 200 && p.getX() < 501) myWorkshop.loadCar(cars.get(i));
                 frame.drawPanel.moveit(p, i);
             }
             frame.drawPanel.repaint();
