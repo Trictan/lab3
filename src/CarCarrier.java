@@ -1,4 +1,4 @@
-package src.main;
+package src;
 import java.awt.*;
 //import java.math.*;
 //import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package src.main;
+package src;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -106,6 +106,13 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.gas(gasAmount);
+            }
+        });
+
+        brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.brake(gasAmount);
             }
         });
 

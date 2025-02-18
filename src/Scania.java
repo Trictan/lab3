@@ -1,4 +1,4 @@
-package src.main;
+package src;
 import java.awt.*;
 
 public class Scania extends Truck{

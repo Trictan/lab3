@@ -1,4 +1,4 @@
-package src.main;
+package src;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ public class Carrier<T extends Car> {
     public void setPosition(double x, double y) {
         position.setLocation(x, y);
         for (int i = 0; i < load.size(); i++) {
-            load.get(i).towedBy(this);
+            load.get(i).follow(this);
         }
         
     }

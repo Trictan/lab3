@@ -7,13 +7,13 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import src.main.Car;
-import src.main.CarCarrier;
-import src.main.Saab95;
-import src.main.Volvo240;
-import src.main.Workshop;
-import src.main.Scania;
-import src.main.Truck;
+import src.Car;
+import src.CarCarrier;
+import src.Saab95;
+import src.Scania;
+import src.Truck;
+import src.Volvo240;
+import src.Workshop;
 
 class CarTest {
 
