@@ -2,24 +2,23 @@ package src.main;
 import java.awt.*;
 
 public abstract class Car implements Movable{
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
+    private final int nrDoors; // Number of doors on the car
+    private final double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
     private int dirAngle; // The current direction of the car
     private Point position;
     private Color color; // Color of the car
-    private String modelName; // The car model name
+    private final String modelName; // The car model name
     private boolean towed;
 
     public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
         this.nrDoors=nrDoors;
         this.enginePower=enginePower;
-        this.currentSpeed=currentSpeed;
+        this.currentSpeed=0;
         this.dirAngle = 90;
         this.position = new Point(0,0);
         this.color=color;
         this.modelName=modelName;
-        stopEngine();
     }
 
     // TOW
@@ -40,6 +39,7 @@ public abstract class Car implements Movable{
         towed = false;
     }
 
+    // cc syftar på CarCarrier men objektet här är inte CarCarriern utan Carrier innuti CarCarrier?
     protected void towedBy(Carrier cc) {
         this.setPosition(cc.getPosition().getX(), cc.getPosition().getY());
     }
@@ -73,6 +73,8 @@ public abstract class Car implements Movable{
         return color;
     }
 
+    
+    @SuppressWarnings("unused")
     private void setColor(Color clr){
 	    color = clr;
     }

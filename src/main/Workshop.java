@@ -7,7 +7,7 @@ public class Workshop<T extends Car> {
     private ArrayList<String> whitelist;
 
     public Workshop(int capacity, Point position, ArrayList<String> whitelist) {
-        this.parent = new Carrier<T>(capacity, position);
+        this.parent = new Carrier<>(capacity, position);
         this.whitelist = whitelist;
     }
 
