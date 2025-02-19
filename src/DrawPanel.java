@@ -14,6 +14,12 @@ public class DrawPanel extends JPanel{
     BufferedImage saabImage;
     BufferedImage scaniaImage;
 
+    int imgWidth=100;
+    int imgHeight=60;
+
+    int xOffset= (int) imgWidth/2;
+    int yOffset= (int) imgHeight/2;
+
     Point[] carPoints = {new Point(), new Point(), new Point()};
 
     BufferedImage volvoWorkshopImage;
@@ -48,10 +54,10 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, carPoints[0].x, carPoints[0].y, null);
-        g.drawImage(saabImage, carPoints[1].x, carPoints[1].y, null);
-        g.drawImage(scaniaImage, carPoints[2].x, carPoints[2].y, null); // see javadoc for more info on the parameters
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+        g.drawImage(volvoImage, carPoints[0].x-xOffset, carPoints[0].y-yOffset, null);
+        g.drawImage(saabImage, carPoints[1].x-xOffset, carPoints[1].y-yOffset, null);
+        g.drawImage(scaniaImage, carPoints[2].x-xOffset, carPoints[2].y-yOffset, null); // see javadoc for more info on the parameters
+        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x-49, volvoWorkshopPoint.y-48, null);
     }
 }
 

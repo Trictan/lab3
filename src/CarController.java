@@ -33,11 +33,12 @@ public class CarController {
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
-        Volvo240 myVolvo = new Volvo240(new Color(0,255,0,0), new P2D(0,0));
-        Saab95 mySaab = new Saab95(new Color(0,255,0,0), new P2D(0,100));
-        Scania myScania = new Scania(new Color(0,255,0,0), new P2D(0,200));
+        Volvo240 myVolvo = new Volvo240(new Color(0,255,0,0), new P2D(50,30));
+        Saab95 mySaab = new Saab95(new Color(0,255,0,0), new P2D(50,130));
+        Scania myScania = new Scania(new Color(0,255,0,0), new P2D(50,230));
+
         ArrayList<String> whitelist = new ArrayList<>(Arrays.asList("Volvo240"));
-        cc.myWorkshop = new Workshop<Car>(3, new P2D(350,98), whitelist);
+        cc.myWorkshop = new Workshop<Car>(3, new P2D(300,50), whitelist);
         cc.cars.add(myVolvo);
         cc.cars.add(mySaab);
         cc.cars.add(myScania);
@@ -58,9 +59,9 @@ public class CarController {
                 Car currentCar = cars.get(i);
                 currentCar.move();
                 P2D p = currentCar.getPosition();
-                if (p.getX()<0) {currentCar.stopEngine(); currentCar.setPosition(0, p.getY()); for (var k = 0; k<36; k++) {currentCar.turnLeft();}; currentCar.startEngine();}
-                if (p.getX()>700) {currentCar.stopEngine(); currentCar.setPosition(700, p.getY()); for (var k = 0; k<36; k++) {currentCar.turnRight();}; currentCar.startEngine();}
-                if (p.getX() > 200 && p.getX() < 501) myWorkshop.loadCar(cars.get(i));
+                if (p.getX()<50) {currentCar.stopEngine(); currentCar.setPosition(50, p.getY()); for (var k = 0; k<36; k++) {currentCar.turnLeft();}; currentCar.startEngine();}
+                if (p.getX()>750) {currentCar.stopEngine(); currentCar.setPosition(750, p.getY()); for (var k = 0; k<36; k++) {currentCar.turnRight();}; currentCar.startEngine();}
+                if (myWorkshop.isClose(currentCar)) {myWorkshop.loadCar(cars.get(i));}
                 frame.drawPanel.moveit(p, i);
             }
             frame.drawPanel.repaint();

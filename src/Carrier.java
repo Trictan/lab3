@@ -31,7 +31,7 @@ public class Carrier<T extends Car> {
         double x_dif = car.getPosition().getX() - getPosition().getX();
         double y_dif = car.getPosition().getY() - getPosition().getY();
         double r = Math.sqrt(Math.pow(x_dif, 2)+Math.pow(y_dif, 2));
-        if (r<300) {return true;} else {
+        if (r<80) {return true;} else {
             return false;
         }
     }
