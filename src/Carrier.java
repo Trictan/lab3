@@ -1,5 +1,4 @@
 package src;
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Carrier<T extends Car> {

@@ -39,7 +39,7 @@ public abstract class Car implements Movable{
         towed = false;
     }
 
-    protected void follow(Carrier carrier) { //fix
+    protected void follow(Carrier<? extends Car> carrier) { //fix
         this.setPosition(carrier.getPosition().getX(), carrier.getPosition().getY());
     }
 
