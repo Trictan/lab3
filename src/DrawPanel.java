@@ -2,6 +2,8 @@ package src;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -12,6 +14,7 @@ public class DrawPanel extends JPanel{
     BufferedImage volvoImage;
     BufferedImage saabImage;
     BufferedImage scaniaImage;
+    BufferedImage volvoWorkshopImage;
 
     int imgWidth=100;
     int imgHeight=60;
@@ -19,15 +22,14 @@ public class DrawPanel extends JPanel{
     int xOffset= (int) imgWidth/2;
     int yOffset= (int) imgHeight/2;
 
-    Point[] carPoints = {new Point(), new Point(), new Point()};
+    ArrayList<? extends Drawable> drawableObjects;
+    Drawable drawableWorkshop;
 
-    BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,50);
-
-    // TODO: Make this general for all cars
-    void moveit(P2D p, int i){
-        carPoints[i] = new Point((int) p.getX(), (int) p.getY());
+    public void updateDrawableObjects(ArrayList<? extends Drawable> newDrawableObjects, Drawable newDrawableWorkshop) {
+        drawableObjects = newDrawableObjects;
+        drawableWorkshop = newDrawableWorkshop;
     }
+
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
@@ -53,10 +55,26 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, carPoints[0].x-xOffset, carPoints[0].y-yOffset, null);
-        g.drawImage(saabImage, carPoints[1].x-xOffset, carPoints[1].y-yOffset, null);
-        g.drawImage(scaniaImage, carPoints[2].x-xOffset, carPoints[2].y-yOffset, null); // see javadoc for more info on the parameters
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x-49, volvoWorkshopPoint.y-48, null);
+        BufferedImage image;
+        for (Drawable d : drawableObjects) {
+            switch (d.getClass().getSimpleName()) {
+                case "Volvo240":
+                    image = volvoImage;
+                    break;
+                case "Saab95":
+                    image = saabImage;
+                    break;
+                case "Scania":
+                    image = scaniaImage;
+                    break;
+                default:
+                    image = volvoImage;
+                    break;
+            }
+            g.drawImage(image, (int) d.getPosition().getX()-xOffset, (int) d.getPosition().getY()-yOffset,null);
+        }
+        g.drawImage(volvoWorkshopImage, (int) drawableWorkshop.getPosition().getX()-xOffset, (int) drawableWorkshop.getPosition().getY()-yOffset, null);
     }
 }
+
 

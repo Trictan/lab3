@@ -1,7 +1,7 @@
 package src;
 import java.util.ArrayList;
 
-public class Workshop<T extends Car> {
+public class Workshop<T extends Car> implements Drawable {
     private Carrier<T> parent;
     private ArrayList<String> whitelist;
 

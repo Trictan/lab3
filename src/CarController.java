@@ -3,8 +3,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.awt.*;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -26,27 +24,12 @@ public class CarController {
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
     Workshop<Car> myWorkshop;
+    
 
     //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-        Volvo240 myVolvo = new Volvo240(new Color(0,255,0,0), new P2D(50,30));
-        Saab95 mySaab = new Saab95(new Color(0,255,0,0), new P2D(50,130));
-        Scania myScania = new Scania(new Color(0,255,0,0), new P2D(50,230));
-
-        ArrayList<String> whitelist = new ArrayList<>(Arrays.asList("Volvo240"));
-        cc.myWorkshop = new Workshop<Car>(3, new P2D(300,50), whitelist);
-        cc.cars.add(myVolvo);
-        cc.cars.add(mySaab);
-        cc.cars.add(myScania);
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
-        cc.timer.start();
+    public CarController() {
+        this.frame = new CarView("CarSim 1.0", this);
+        this.timer.start();
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -54,15 +37,13 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (var i = 0; i < cars.size(); i++) {
-                Car currentCar = cars.get(i);
+            for (Car currentCar : cars) {
                 currentCar.move();
-                P2D p = currentCar.getPosition();
-                if (p.getX()<50) {currentCar.stopEngine(); currentCar.setPosition(50, p.getY()); for (var k = 0; k<36; k++) {currentCar.turnLeft();}; currentCar.startEngine();}
-                if (p.getX()>750) {currentCar.stopEngine(); currentCar.setPosition(750, p.getY()); for (var k = 0; k<36; k++) {currentCar.turnRight();}; currentCar.startEngine();}
-                if (myWorkshop.isClose(currentCar)) {myWorkshop.loadCar(cars.get(i));}
-                frame.drawPanel.moveit(p, i);
+                if (currentCar.getPosition().getX()<50) {currentCar.stopEngine(); currentCar.setPosition(50, currentCar.getPosition().getY()); for (var k = 0; k<36; k++) {currentCar.turnLeft();}; currentCar.startEngine();}
+                if (currentCar.getPosition().getX()>750) {currentCar.stopEngine(); currentCar.setPosition(750, currentCar.getPosition().getY()); for (var k = 0; k<36; k++) {currentCar.turnRight();}; currentCar.startEngine();}
+                if (myWorkshop.isClose(currentCar)) {myWorkshop.loadCar(currentCar);}
             }
+            frame.drawPanel.updateDrawableObjects(cars,myWorkshop);
             frame.drawPanel.repaint();
         }
     }
