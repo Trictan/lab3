@@ -32,6 +32,14 @@ public class CarController {
         this.timer.start();
     }
 
+    public void addCar(Car car) {
+        cars.add(car);
+    }
+
+    public void removeCar(int index) {
+        cars.remove(index-1);
+    }
+
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */

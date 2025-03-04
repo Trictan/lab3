@@ -23,11 +23,12 @@ public class DrawPanel extends JPanel{
     int yOffset= (int) imgHeight/2;
 
     ArrayList<? extends Drawable> drawableObjects;
-    Drawable drawableWorkshop;
+    Workshop<Car> drawableWorkshop;
 
-    public void updateDrawableObjects(ArrayList<? extends Drawable> newDrawableObjects, Drawable newDrawableWorkshop) {
-        drawableObjects = newDrawableObjects;
-        drawableWorkshop = newDrawableWorkshop;
+    public void updateDrawableObjects(ArrayList<Car> cars, Workshop<Car> workshop) {
+        drawableObjects = cars;
+        drawableWorkshop = workshop;
+        
     }
 
 
