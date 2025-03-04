@@ -1,7 +1,7 @@
 package src;
 import java.awt.*;
 
-public class Saab95 extends Car{
+public class Saab95 extends Car implements Turbo {
 
     private boolean turboOn;
 

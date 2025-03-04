@@ -21,21 +21,21 @@ public abstract class Car implements Movable, Drawable{
         this.modelName=modelName;
     }
 
-    // TOW
+    // CARRY
 
-    public boolean isTowable() {
+    public boolean isCarriable() {
         return true;
     }
 
-    public boolean isTowed() {
+    public boolean isCarried() {
         return towed;
     }
 
-    public void setTowed() {
+    public void setCarried() {
         towed = true;
     }
 
-    public void setNotTowed() {
+    public void setNotCarried() {
         towed = false;
     }
 
@@ -44,6 +44,12 @@ public abstract class Car implements Movable, Drawable{
     }
 
     //
+
+    public void turnAround() {
+        this.stopEngine();
+        for (var k = 0; k<36; k++) {this.turnLeft();}
+        this.startEngine();
+    }
 
     public int getNrDoors(){
         return nrDoors;
@@ -79,7 +85,7 @@ public abstract class Car implements Movable, Drawable{
     }
 
     public void startEngine(){
-        if (!isTowed()) {currentSpeed = 0.1;}
+        if (!isCarried()) {currentSpeed = 0.1;}
     }
 
     public void stopEngine(){
@@ -91,7 +97,7 @@ public abstract class Car implements Movable, Drawable{
     }
 
     private void incrementSpeed(double amount){
-        if (!isTowed()) {
+        if (!isCarried()) {
 	        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
         }
     }
@@ -126,7 +132,7 @@ public abstract class Car implements Movable, Drawable{
         if (amount < 0 || amount > 1) {
             System.out.println("Invalid input: gas only accepts values in the interval [0,1].");
         } else {
-            if (!isTowed()) {incrementSpeed(amount);}
+            if (!isCarried()) {incrementSpeed(amount);}
         }
     }
 

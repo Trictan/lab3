@@ -29,11 +29,21 @@ public class CarController {
     //methods:
     public CarController() {
         this.frame = new CarView("CarSim 1.0", this);
+    }
+
+    public void startTimer() {
         this.timer.start();
     }
 
-    public void addCar(Car car) {
+
+    public void addObject(Car car) {
         cars.add(car);
+        frame.drawPanel.addDrawableObject(car);
+    }
+
+    public void addObject(Workshop<Car> workshop) {
+        myWorkshop = workshop;
+        this.frame.drawPanel.addDrawableObject(workshop);
     }
 
     public void removeCar(int index) {
@@ -45,13 +55,13 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            if (cars.size()>0)
             for (Car currentCar : cars) {
                 currentCar.move();
-                if (currentCar.getPosition().getX()<50) {currentCar.stopEngine(); currentCar.setPosition(50, currentCar.getPosition().getY()); for (var k = 0; k<36; k++) {currentCar.turnLeft();}; currentCar.startEngine();}
-                if (currentCar.getPosition().getX()>750) {currentCar.stopEngine(); currentCar.setPosition(750, currentCar.getPosition().getY()); for (var k = 0; k<36; k++) {currentCar.turnRight();}; currentCar.startEngine();}
+                if (currentCar.getPosition().getX()<50) {currentCar.turnAround();; currentCar.setPosition(50, currentCar.getPosition().getY());}
+                if (currentCar.getPosition().getX()>750) {currentCar.turnAround(); currentCar.setPosition(750, currentCar.getPosition().getY());}
                 if (myWorkshop.isClose(currentCar)) {myWorkshop.loadCar(currentCar);}
             }
-            frame.drawPanel.updateDrawableObjects(cars,myWorkshop);
             frame.drawPanel.repaint();
         }
     }
@@ -89,23 +99,35 @@ public class CarController {
 
     // SAAB
     void turboOnButton() {
-        Saab95 mySaab = (Saab95) cars.get(1);
-        mySaab.setTurboOn();
+        for (Car car: cars) {
+            if (car instanceof Turbo) {
+                ((Turbo) car).setTurboOn();
+            }
+        }
     }
 
     void turboOffButton() {
-        Saab95 mySaab = (Saab95) cars.get(1);
-        mySaab.setTurboOff();
+        for (Car car: cars) {
+            if (car instanceof Turbo) {
+                ((Turbo) car).setTurboOff();
+            }
+        }
     }
     // SCANIA
     void liftBedButton() {
-        Scania myScania = (Scania) cars.get(2);
-        myScania.increaseIncline();
+        for (Car car:cars) {
+        if (car instanceof Truck) {
+            ((Truck) car).increaseIncline();
+            }
+        }
     }
 
     void lowerBedButton() {
-        Scania myScania = (Scania) cars.get(2);
-        myScania.decreaseIncline();
+        for (Car car:cars) {
+            if (car instanceof Truck) {
+                ((Truck) car).decreaseIncline();
+            }
+        }
     }
 
 }

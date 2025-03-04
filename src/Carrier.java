@@ -49,12 +49,12 @@ public class Carrier<T extends Car> {
 
     public void loadCar(T car) {
         if (load.size() < capacity) { // has space
-            if (car.isTowable() && !car.isTowed()) { // car is ok to pickup
+            if (car.isCarriable() && !car.isCarried()) { // car is ok to pickup
                 if (isClose(car)) {
                     System.out.println("Towed " + car.getModelName());
                     car.stopEngine();
                     load.add(car);
-                    car.setTowed();
+                    car.setCarried();
                 }
             }
         }
@@ -64,7 +64,7 @@ public class Carrier<T extends Car> {
         if (load.size() > 0) {
             if (index >= 0 && index < load.size()) {
                 T outputCar = load.get(index);
-                outputCar.setNotTowed();
+                outputCar.setNotCarried();
                 load.remove(index);
                 return outputCar;
             } else {throw new java.lang.Error("Could not find car. Index out of range.");}
