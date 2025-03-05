@@ -25,6 +25,8 @@ public class CarView extends JFrame {
 
     JPanel controlPanel = new JPanel();
 
+    Timer timer;
+
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
     int gasAmount = 0;
@@ -41,11 +43,18 @@ public class CarView extends JFrame {
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc){
+    public CarView(String framename, CarController cc, Timer timer){
         this.carC = cc;
+        this.timer = timer;
         initComponents(framename);
     }
 
+    private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            drawPanel.repaint();
+        }
+    }
+    
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
