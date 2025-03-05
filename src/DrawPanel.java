@@ -9,7 +9,8 @@ import javax.swing.*;
 
 // This panel represents the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+
+public class DrawPanel extends JPanel {
 
     BufferedImage volvoImage;
     BufferedImage saabImage;
@@ -24,11 +25,9 @@ public class DrawPanel extends JPanel{
 
     ArrayList<Drawable> drawableObjects;
 
-
-    public void addDrawableObject(Drawable drawableObject) {
-        drawableObjects.add(drawableObject);
+    public void setDrawableObjects(ArrayList<Drawable> drawableObjects) {
+        this.drawableObjects=drawableObjects;
     }
-
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {

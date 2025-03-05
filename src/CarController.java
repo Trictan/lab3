@@ -1,8 +1,5 @@
 package src;
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -11,20 +8,17 @@ import java.util.ArrayList;
  */
 
 public class CarController {
-    // member fields:
-
-
 
     // Model of MVC pattern
     CarModel model;
 
-    //methods:
+    // Signal model
     public CarController(CarModel model) {
         this.model = model;
     }
     
     public void addObject(Car car) {
-        model.addObject(car);
+         model.addObject(car);
     }
 
     public void addObject(Workshop<Car> workshop) {

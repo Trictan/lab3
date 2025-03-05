@@ -5,6 +5,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -14,18 +15,17 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame {
+public class CarView extends JFrame implements Observer {
     private static final int X = 800;
     private static final int Y = 800;
 
-    // The controller member
+    CarModel model;
+
     CarController carC;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    DrawPanel drawPanel;
 
     JPanel controlPanel = new JPanel();
-
-    Timer timer;
 
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
@@ -43,20 +43,26 @@ public class CarView extends JFrame {
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc, Timer timer){
+    public CarView(String framename, CarModel model, CarController cc, Observable t){
+        this.drawPanel = new DrawPanel(X, Y-240);
+        this.model = model;
         this.carC = cc;
-        this.timer = timer;
+        t.addObserver(this);
         initComponents(framename);
     }
 
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            drawPanel.repaint();
-        }
+    public void update() {
+        ArrayList<Car> cars = model.getCars();
+        ArrayList<Workshop<Car>> workshops = model.getWorkshops();
+        ArrayList<Drawable> drawablesObjects = new ArrayList<Drawable>();
+        for (Car car : cars) {drawablesObjects.add((Drawable) car);}
+        for (Workshop<Car> workshop : workshops) {drawablesObjects.add((Drawable) workshop);}
+        drawPanel.setDrawableObjects(drawablesObjects);
+        drawPanel.repaint();
+        //System.out.println("update");
     }
     
     // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
 
         this.setTitle(title);
@@ -106,8 +112,7 @@ public class CarView extends JFrame {
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
+        // Actionlisteners
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

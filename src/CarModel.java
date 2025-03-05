@@ -7,13 +7,23 @@ import javax.swing.*;
 
 public class CarModel {
     ArrayList<Car> cars = new ArrayList<>();
-    Workshop<Car> myWorkshop;
+    ArrayList<Workshop<Car>> workshops = new ArrayList<>();
 
     private final int delay = 50;
+    private Timer timer = new Timer(delay, new TimerListener());
+    private Observable observer;
 
-
-    public CarModel() {
+    public CarModel(Observable o) {
+        this.observer = o;
         this.timer.start();
+    }
+
+    public ArrayList<Car> getCars() {
+        return cars;
+    }
+
+    public ArrayList<Workshop<Car>> getWorkshops() {
+        return workshops;
     }
 
     private class TimerListener implements ActionListener {
@@ -21,24 +31,24 @@ public class CarModel {
             if (cars.size()>0)
             for (Car currentCar : cars) {
                 currentCar.move();
-                if (currentCar.getPosition().getX()<50) {currentCar.turnAround();; currentCar.setPosition(50, currentCar.getPosition().getY());}
+                if (currentCar.getPosition().getX()<50) {currentCar.turnAround(); currentCar.setPosition(50, currentCar.getPosition().getY());}
                 if (currentCar.getPosition().getX()>750) {currentCar.turnAround(); currentCar.setPosition(750, currentCar.getPosition().getY());}
-                if (myWorkshop.isClose(currentCar)) {myWorkshop.loadCar(currentCar);}
+                for (Workshop<Car> workshop : workshops) {
+                    if (workshop.isClose(currentCar)) {workshop.loadCar(currentCar);}
+                }
             }
+            observer.notifyObservers();
         }
     }
-
 
     // add objects
 
     public void addObject(Car car) {
         cars.add(car);
-        //frame.drawPanel.addDrawableObject(car);
     }
 
     public void addObject(Workshop<Car> workshop) {
-        myWorkshop = workshop;
-        //this.frame.drawPanel.addDrawableObject(workshop);
+        workshops.add(workshop);
     }
 
     // CAR
