@@ -1,9 +1,11 @@
 package src;
 
 import java.util.ArrayList;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CarModel {
     ArrayList<Car> cars = new ArrayList<>();
@@ -49,6 +51,25 @@ public class CarModel {
 
     public void addObject(Workshop<Car> workshop) {
         workshops.add(workshop);
+    }
+
+    // add/remove cars
+    public void addCar() {
+        if (cars.size()>9) {return;}
+        Car newCar;
+        int randomNum = ThreadLocalRandom.current().nextInt(0, 2 + 1);
+        newCar = switch (randomNum) {
+            case 0 -> new Volvo240(new Color(0,0,0), new P2D(50, cars.size()*60+50));
+            case 1 -> new Saab95(new Color(0,0,0), new P2D(50, cars.size()*60+50));
+            case 2 -> new Scania(new Color(0,0,0), new P2D(50, cars.size()*60+50));
+            default -> new Volvo240(new Color(0,0,0), new P2D(50, cars.size()*60+50));
+        };
+        cars.add(newCar);
+    }
+
+    public void removeCar() {
+        if (cars.isEmpty()) {return;}
+        cars.remove(0);
     }
 
     // CAR

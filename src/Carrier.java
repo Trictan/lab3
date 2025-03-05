@@ -51,7 +51,7 @@ public class Carrier<T extends Car> {
         if (load.size() < capacity) { // has space
             if (car.isCarriable() && !car.isCarried()) { // car is ok to pickup
                 if (isClose(car)) {
-                    System.out.println("Towed " + car.getModelName());
+                    System.out.println("Carrying " + car.getModelName());
                     car.stopEngine();
                     load.add(car);
                     car.setCarried();

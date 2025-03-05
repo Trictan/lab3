@@ -12,12 +12,11 @@ import java.util.ArrayList;
  * It initializes with being center on the screen and attaching it's controller in it's state.
  * It communicates with the Controller by calling methods of it when an action fires of in
  * each of it's components.
- * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
 public class CarView extends JFrame implements Observer {
     private static final int X = 800;
-    private static final int Y = 800;
+    private static final int Y = 900;
 
     CarModel model;
 
@@ -41,6 +40,9 @@ public class CarView extends JFrame implements Observer {
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
+
+    JButton addCarButton = new JButton("Add car");
+    JButton removeCarButton = new JButton("Rem car");
 
     // Constructor
     public CarView(String framename, CarModel model, CarController cc, Observable t){
@@ -89,14 +91,16 @@ public class CarView extends JFrame implements Observer {
 
         this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2,4));
+        controlPanel.setLayout(new GridLayout(2,5));
 
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCarButton,3);
+        controlPanel.add(brakeButton, 4);
+        controlPanel.add(turboOffButton, 5);
+        controlPanel.add(lowerBedButton, 6);
+        controlPanel.add(removeCarButton, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -166,6 +170,20 @@ public class CarView extends JFrame implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.stopEngine();
+            }
+        });
+
+        addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.addCar();
+            }
+        });
+
+        removeCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.removeCar();
             }
         });
 

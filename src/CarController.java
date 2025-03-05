@@ -25,6 +25,14 @@ public class CarController {
         model.addObject(workshop);
     }
 
+    public void addCar() {
+        model.addCar();
+    }
+
+    public void removeCar() {
+        model.removeCar();
+    }
+
 
     void gas(int amount) {
         model.gas(amount);
