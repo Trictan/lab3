@@ -12,18 +12,18 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel {
 
-    BufferedImage volvoImage;
-    BufferedImage saabImage;
-    BufferedImage scaniaImage;
-    BufferedImage volvoWorkshopImage;
+    private BufferedImage volvoImage;
+    private BufferedImage saabImage;
+    private BufferedImage scaniaImage;
+    private BufferedImage volvoWorkshopImage;
 
-    int imgWidth=100;
-    int imgHeight=60;
+    private int imgWidth=100;
+    private int imgHeight=60;
 
-    int xOffset= (int) imgWidth/2;
-    int yOffset= (int) imgHeight/2;
+    private int xOffset= (int) imgWidth/2;
+    private int yOffset= (int) imgHeight/2;
 
-    ArrayList<Drawable> drawableObjects;
+    private ArrayList<Drawable> drawableObjects;
 
     public void setDrawableObjects(ArrayList<Drawable> drawableObjects) {
         this.drawableObjects=drawableObjects;

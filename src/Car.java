@@ -106,7 +106,7 @@ public abstract class Car implements Movable, Drawable{
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
-    public void setPosition(double x, double y) {
+    public void setPosition(double x, double y) { //obs public
         position.setLocation(x,y);
     }
 

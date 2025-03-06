@@ -26,7 +26,7 @@ public class Workshop<T extends Car> implements Drawable {
         if (whitelist.contains(car.getModelName())) {
             parent.loadCar(car);
         } else {
-            System.out.println(car.getModelName() + "not accepted in this workshop!");
+            System.out.println(car.getModelName() + " not accepted in this workshop!");
             //throw new java.lang.Error(car.getModelName() + " is not accepted at this workshop!");
         } 
     }

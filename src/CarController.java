@@ -10,19 +10,11 @@ package src;
 public class CarController {
 
     // Model of MVC pattern
-    CarModel model;
+    private CarModel model;
 
     // Signal model
     public CarController(CarModel model) {
         this.model = model;
-    }
-    
-    public void addObject(Car car) {
-         model.addObject(car);
-    }
-
-    public void addObject(Workshop<Car> workshop) {
-        model.addObject(workshop);
     }
 
     public void addCar() {
@@ -34,36 +26,36 @@ public class CarController {
     }
 
 
-    void gas(int amount) {
+    public void gas(int amount) {
         model.gas(amount);
     }
 
-    void brake(int amount) {
+    public void brake(int amount) {
         model.brake(amount);
     }
 
-    void stopEngine() {
+    public void stopEngine() {
         model.stopEngine();
     }
 
-    void startEngine() {
+    public void startEngine() {
         model.startEngine();
     }
 
     // SAAB
-    void turboOnButton() {
+    public void turboOnButton() {
         model.turboOnButton();
     }
 
-    void turboOffButton() {
+    public void turboOffButton() {
         model.turboOffButton();
     }
     // SCANIA
-    void liftBedButton() {
+    public void liftBedButton() {
         model.liftBedButton();
     }
 
-    void lowerBedButton() {
+    public void lowerBedButton() {
         model.lowerBedButton();
     }
     

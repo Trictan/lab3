@@ -25,7 +25,7 @@ public class Main {
         carController.addObject(mySaab);
         carController.addObject(myScania);
         */
-        carController.addObject(myWorkshop);
+        carModel.addObject(myWorkshop);
 
         @SuppressWarnings("unused")
         CarView carview = new CarView("CarView 1.0",carModel, carController,o);

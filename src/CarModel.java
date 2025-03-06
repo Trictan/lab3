@@ -8,8 +8,8 @@ import javax.swing.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CarModel {
-    ArrayList<Car> cars = new ArrayList<>();
-    ArrayList<Workshop<Car>> workshops = new ArrayList<>();
+    private ArrayList<Car> cars = new ArrayList<>();
+    private ArrayList<Workshop<Car>> workshops = new ArrayList<>();
 
     private final int delay = 50;
     private Timer timer = new Timer(delay, new TimerListener());
@@ -64,7 +64,7 @@ public class CarModel {
             case 2 -> new Scania(new Color(0,0,0), new P2D(50, cars.size()*60+50));
             default -> new Volvo240(new Color(0,0,0), new P2D(50, cars.size()*60+50));
         };
-        cars.add(newCar);
+        addObject(newCar);
     }
 
     public void removeCar() {
@@ -73,7 +73,7 @@ public class CarModel {
     }
 
     // CAR
-    void gas(int amount) {
+    public void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Car car : cars
                 ) {
@@ -81,7 +81,7 @@ public class CarModel {
         }
     }
 
-    void brake(int amount) {
+    public void brake(int amount) {
         double gas = ((double) amount) / 100;
         for (Car car : cars
                 ) {
@@ -89,14 +89,14 @@ public class CarModel {
         }
     }
 
-    void stopEngine() {
+    public void stopEngine() {
         for (Car car : cars
                 ) {
             car.stopEngine();
         }
     }
 
-    void startEngine() {
+    public void startEngine() {
         for (Car car : cars
                 ) {
             car.startEngine();
@@ -104,7 +104,7 @@ public class CarModel {
     }
 
     // SAAB
-    void turboOnButton() {
+    public void turboOnButton() {
         for (Car car: cars) {
             if (car instanceof Turbo) {
                 ((Turbo) car).setTurboOn();
@@ -112,7 +112,7 @@ public class CarModel {
         }
     }
 
-    void turboOffButton() {
+    public void turboOffButton() {
         for (Car car: cars) {
             if (car instanceof Turbo) {
                 ((Turbo) car).setTurboOff();
@@ -120,7 +120,7 @@ public class CarModel {
         }
     }
     // SCANIA
-    void liftBedButton() {
+    public void liftBedButton() {
         for (Car car:cars) {
         if (car instanceof Truck) {
             ((Truck) car).increaseIncline();
@@ -128,7 +128,7 @@ public class CarModel {
         }
     }
 
-    void lowerBedButton() {
+    public void lowerBedButton() {
         for (Car car:cars) {
             if (car instanceof Truck) {
                 ((Truck) car).decreaseIncline();
